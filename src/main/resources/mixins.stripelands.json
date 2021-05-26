@@ -4,6 +4,8 @@
   "mixins": [
     "MixinMinecraft"
   ],
-  "client": [],
+  "client": [
+    "MixinRenderChunk"
+  ],
   "server": []
 }
