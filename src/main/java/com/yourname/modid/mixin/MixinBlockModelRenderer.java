@@ -36,10 +36,11 @@ public abstract class MixinBlockModelRenderer {
     @Overwrite
     private void renderQuadsSmooth(IBlockAccess blockAccessIn, IBlockState stateIn, BlockPos posIn, BufferBuilder buffer, List<BakedQuad> list, float[] quadBounds, BitSet bitSet, BlockModelRenderer.AmbientOcclusionFace aoFace)
     {
+        System.out.println("renderer patches");
         Vec3d vec3d = stateIn.getOffset(blockAccessIn, posIn);
-        double d0 = (float)posIn.getX() + vec3d.x;
-        double d1 = (float)posIn.getY() + vec3d.y;
-        double d2 = (float)posIn.getZ() + vec3d.z;
+        float d0 = (float)posIn.getX() + (float)vec3d.x;
+        float d1 = (float)posIn.getY() + (float)vec3d.y;
+        float d2 = (float)posIn.getZ() + (float)vec3d.z;
         int i = 0;
 
         for (int j = list.size(); i < j; ++i)

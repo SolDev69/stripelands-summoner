@@ -2,7 +2,6 @@ package com.yourname.modid.core;
 
 import net.minecraftforge.fml.relauncher.CoreModManager;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
-import org.apache.logging.log4j.LogManager;
 import org.spongepowered.asm.launch.MixinBootstrap;
 
 import javax.annotation.Nullable;
@@ -27,8 +26,8 @@ public class CoreMod implements IFMLLoadingPlugin {
                 }
             } catch (URISyntaxException ignored) {}
         } else {
-            LogManager.getLogger().warn("No CodeSource, if this is not a development environment we might run into problems!");
-            LogManager.getLogger().warn(this.getClass().getProtectionDomain());
+            System.out.println("No CodeSource, if this is not a development environment we might run into problems!");
+            System.out.println(this.getClass().getProtectionDomain());
         }
     }
 
