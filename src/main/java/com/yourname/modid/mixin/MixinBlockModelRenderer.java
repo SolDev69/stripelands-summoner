@@ -22,15 +22,7 @@ import java.util.List;
 
 @Mixin(BlockModelRenderer.class)
 public abstract class MixinBlockModelRenderer {
-    @Shadow
-    private final BlockColors blockColors;
 
-    protected MixinBlockModelRenderer(BlockColors blockColors) {
-        this.blockColors = blockColors;
-    }
-
-    @Shadow
-    public abstract void fillQuadBounds(IBlockState stateIn, int[] vertexData, EnumFacing face, @Nullable float[] quadBounds, BitSet boundsFlags);
     /**
      * @author
      */
@@ -47,7 +39,7 @@ public abstract class MixinBlockModelRenderer {
         for (int j = list.size(); i < j; ++i)
         {
             BakedQuad bakedquad = list.get(i);
-            this.fillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), quadBounds, bitSet);
+            ((MixinBlockModelRendererAccessor)this).invokeFillQuadBounds(stateIn, bakedquad.getVertexData(), bakedquad.getFace(), quadBounds, bitSet);
             aoFace.updateVertexBrightness(blockAccessIn, stateIn, posIn, bakedquad.getFace(), quadBounds, bitSet);
             buffer.addVertexData(bakedquad.getVertexData());
             buffer.putBrightness4(aoFace.vertexBrightness[0], aoFace.vertexBrightness[1], aoFace.vertexBrightness[2], aoFace.vertexBrightness[3]);
@@ -61,7 +53,7 @@ public abstract class MixinBlockModelRenderer {
             }
             if (bakedquad.hasTintIndex())
             {
-                int k = this.blockColors.colorMultiplier(stateIn, blockAccessIn, posIn, bakedquad.getTintIndex());
+                int k = ((MixinBlockModelRendererAccessor)this).getBlockColors().colorMultiplier(stateIn, blockAccessIn, posIn, bakedquad.getTintIndex());
 
                 if (EntityRenderer.anaglyphEnable)
                 {
@@ -104,7 +96,7 @@ public abstract class MixinBlockModelRenderer {
         for(int j = p_187496_7_.size(); i < j; ++i) {
             BakedQuad bakedquad = (BakedQuad)p_187496_7_.get(i);
             if (p_187496_5_) {
-                this.fillQuadBounds(p_187496_2_, bakedquad.getVertexData(), bakedquad.getFace(), (float[])null, p_187496_8_);
+                ((MixinBlockModelRendererAccessor)this).invokeFillQuadBounds(p_187496_2_, bakedquad.getVertexData(), bakedquad.getFace(), (float[])null, p_187496_8_);
                 BlockPos blockpos = p_187496_8_.get(0) ? p_187496_3_.offset(bakedquad.getFace()) : p_187496_3_;
                 p_187496_4_ = p_187496_2_.getPackedLightmapCoords(p_187496_1_, blockpos);
             }
@@ -112,7 +104,7 @@ public abstract class MixinBlockModelRenderer {
             p_187496_6_.addVertexData(bakedquad.getVertexData());
             p_187496_6_.putBrightness4(p_187496_4_, p_187496_4_, p_187496_4_, p_187496_4_);
             if (bakedquad.hasTintIndex()) {
-                int k = this.blockColors.colorMultiplier(p_187496_2_, p_187496_1_, p_187496_3_, bakedquad.getTintIndex());
+                int k = ((MixinBlockModelRendererAccessor)this).getBlockColors().colorMultiplier(p_187496_2_, p_187496_1_, p_187496_3_, bakedquad.getTintIndex());
                 if (EntityRenderer.anaglyphEnable) {
                     k = TextureUtil.anaglyphColor(k);
                 }
