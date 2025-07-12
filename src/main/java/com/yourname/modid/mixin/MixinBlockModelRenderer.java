@@ -89,6 +89,10 @@ public abstract class MixinBlockModelRenderer {
     }
     
     
+    /**
+     * @author
+     * @reason
+     */
     @Overwrite
     private void renderQuadsFlat(IBlockAccess p_187496_1_, IBlockState p_187496_2_, BlockPos p_187496_3_, int p_187496_4_, boolean p_187496_5_, BufferBuilder p_187496_6_, List<BakedQuad> p_187496_7_, BitSet p_187496_8_) {
         Vec3d vec3d = p_187496_2_.getOffset(p_187496_1_, p_187496_3_);
